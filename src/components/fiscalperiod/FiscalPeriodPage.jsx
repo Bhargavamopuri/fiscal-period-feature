@@ -60,11 +60,13 @@ export default function FiscalPeriodPage({ globalSearch = '' }) {
     loadPeriods();
   }, []);
 
+  const [formSuccessMessage, setFormSuccessMessage] = useState(null);
+
   const showToast = (message, type = 'success') => {
     setToast({ message, type });
     setTimeout(() => {
       setToast(null);
-    }, 3800);
+    }, 5000);
   };
 
   // Form Change Handler
@@ -89,11 +91,19 @@ export default function FiscalPeriodPage({ globalSearch = '' }) {
     try {
       if (editingId) {
         await api.updateFiscalPeriod(editingId, formData);
-        showToast(`Period #${formData.periodNumber} updated successfully!`);
+        const msg = `Fiscal Period #${formData.periodNumber} information updated successfully!`;
+        showToast(msg);
+        setFormSuccessMessage(msg);
       } else {
         await api.createFiscalPeriod(formData);
-        showToast(`New Fiscal Period created successfully!`);
+        const msg = `Fiscal Period information saved successfully!`;
+        showToast(msg);
+        setFormSuccessMessage(msg);
       }
+
+      setTimeout(() => {
+        setFormSuccessMessage(null);
+      }, 5000);
 
       handleClear();
       loadPeriods();
@@ -309,6 +319,7 @@ export default function FiscalPeriodPage({ globalSearch = '' }) {
             onClear={handleClear}
             editingId={editingId}
             isSubmitting={isSubmitting}
+            successMessage={formSuccessMessage}
           />
 
           {/* Master Table Card */}

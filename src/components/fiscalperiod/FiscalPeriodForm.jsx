@@ -7,7 +7,8 @@ export default function FiscalPeriodForm({
   onSave,
   onClear,
   editingId,
-  isSubmitting
+  isSubmitting,
+  successMessage
 }) {
   return (
     <div className="glass-card fp-form-card" id="fiscal-form-section">
@@ -80,7 +81,6 @@ export default function FiscalPeriodForm({
               required
             />
           </div>
-
 
           {/* Start Date */}
           <div className="form-field">
@@ -199,6 +199,44 @@ export default function FiscalPeriodForm({
             </div>
           </div>
         </div>
+
+        {/* Visible Success Banner right in the form */}
+        {successMessage && (
+          <div
+            style={{
+              marginTop: '20px',
+              padding: '13px 20px',
+              borderRadius: '14px',
+              background: 'rgba(16, 185, 129, 0.12)',
+              border: '1.5px solid rgba(16, 185, 129, 0.5)',
+              color: '#065f46',
+              fontSize: '14px',
+              fontWeight: '700',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              boxShadow: '0 4px 16px rgba(16, 185, 129, 0.15)',
+              animation: 'fadeUp 0.3s ease'
+            }}
+          >
+            <div
+              style={{
+                width: '24px',
+                height: '24px',
+                borderRadius: '50%',
+                background: '#10b981',
+                color: '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0
+              }}
+            >
+              <IconCheck size={15} />
+            </div>
+            <span>{successMessage}</span>
+          </div>
+        )}
 
         {/* Buttons */}
         <div className="form-actions-bar">
